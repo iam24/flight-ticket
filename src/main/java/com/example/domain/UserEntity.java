@@ -12,12 +12,12 @@ import javax.persistence.*;
 public class UserEntity {
     @Id
     @GeneratedValue
-    private int id;
+    private long id;
     private String name;
     //身份证
     private String person_id;
     //权限
-    private int role_id;
+    private int role_id = 3;
     private String password;
 
     public int getRole_id() {
@@ -28,8 +28,15 @@ public class UserEntity {
         this.role_id = role_id;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
+    }
+
+    public void setPassword(String password) {
+        this.password = MD5.getMD5(password);
+    }
+    public String getPassword(){
+        return password;
     }
 
     public void setId(int id) {
@@ -54,10 +61,14 @@ public class UserEntity {
 
     protected UserEntity() {}
 
-    public UserEntity(String name, String person_id, int role_id, String password){
+    public UserEntity(String name, String password, String person_id, int role_id){
         this.name = name;
         this.person_id = person_id;
         this.role_id = role_id;
         this.password = MD5.getMD5(password);
+    }
+
+    public boolean CheckPersonID(){
+        return this.person_id.length() == 18;
     }
 }

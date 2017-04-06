@@ -5,31 +5,32 @@ import javax.persistence.*;
 /**
  * Created by iam24 on 17/3/30.
  */
+//航线信息表
 @Entity
 public class FlightEntity {
     @Id
     @GeneratedValue
-    private int id;
-    private int plane_id;
+    private long id;
+    private long plane_id;
     private String destination;
-    private int booked_ticket;
-    private int remain_ticket;
+    private long booked_ticket;
+    private long remain_ticket;
 
 
-    public int getId() {
+    public long getId() {
 
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 
-    public int getPlane_id() {
+    public long getPlane_id() {
         return plane_id;
     }
 
-    public void setPlane_id(int plane_id) {
+    public void setPlane_id(long plane_id) {
         this.plane_id = plane_id;
     }
 
@@ -41,25 +42,25 @@ public class FlightEntity {
         this.destination = destination;
     }
 
-    public int getBooked_ticket() {
+    public long getBooked_ticket() {
         return booked_ticket;
     }
 
-    public void setBooked_ticket(int booked_ticket) {
+    public void setBooked_ticket(long booked_ticket) {
         this.booked_ticket = booked_ticket;
     }
 
-    public int getRemain_ticket() {
+    public long getRemain_ticket() {
         return remain_ticket;
     }
 
-    public void setRemain_ticket(int remain_ticket) {
+    public void setRemain_ticket(long remain_ticket) {
         this.remain_ticket = remain_ticket;
     }
 
     protected FlightEntity() {}
 
-    public FlightEntity(int plane_id, String destination, int booked_ticket, int remain_ticket) {
+    public FlightEntity(long plane_id, String destination, long booked_ticket, long remain_ticket) {
         this.plane_id = plane_id;
         this.destination = destination;
         this.booked_ticket = booked_ticket;

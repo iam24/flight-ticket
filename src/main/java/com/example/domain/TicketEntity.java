@@ -5,16 +5,17 @@ import javax.persistence.*;
 /**
  * Created by iam24 on 17/3/30.
  */
+//飞机票表
 @Entity
 public class TicketEntity {
     @Id
     @GeneratedValue
-    private int id;
-    private int seat_number;
+    private long id;
+    private long seat_number;
     private String name;
-    private int flight_number;
+    private long flight_number;
 
-    public int getId() {
+    public long  getId() {
         return id;
     }
 
@@ -22,7 +23,7 @@ public class TicketEntity {
         this.id = id;
     }
 
-    public int getSeat_number() {
+    public long getSeat_number() {
         return seat_number;
     }
 
@@ -38,7 +39,7 @@ public class TicketEntity {
         this.name = name;
     }
 
-    public int getFlight_number() {
+    public long getFlight_number() {
         return flight_number;
     }
 
