@@ -2,18 +2,24 @@ package com.example.controller;
 
 import com.example.Utils.MD5;
 import com.example.domain.UserEntity;
+import com.example.repository.UserRepository;
 import com.example.service.UserService;
+import com.sun.tools.javac.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.AttributeOverride;
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 
 /**
  * Created by iam24 on 17/3/30.
  */
 @Controller
+@RequestMapping("/user")
 public class UserController {
 
     @Autowired
@@ -66,5 +72,11 @@ public class UserController {
     public String delete(@RequestParam("ID") long id, HttpSession session){
         String result = userService.delete(id, session);
         return result;
+    }
+
+    @RequestMapping(value = "/alluser", method = RequestMethod.GET)
+    @ResponseBody
+    public ArrayList<UserEntity> alluser(){
+        return userService.findAllUser();
     }
 }

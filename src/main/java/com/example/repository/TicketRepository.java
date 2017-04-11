@@ -10,5 +10,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface TicketRepository extends CrudRepository<TicketEntity, Long> {
     TicketEntity findByName(String name);
-    TicketEntity findByflight_number(long flight_number);
+    TicketEntity findByFlight(long flight);
+    TicketEntity findByFlightAndName(long flight, String name);
 }

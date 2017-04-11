@@ -15,6 +15,15 @@ public class FlightEntity {
     private String destination;
     private long booked_ticket;
     private long remain_ticket;
+    private long flight;
+
+    public long getFlight() {
+        return flight;
+    }
+
+    public void setFlight(long flight) {
+        this.flight = flight;
+    }
 
 
     public long getId() {
@@ -60,10 +69,11 @@ public class FlightEntity {
 
     protected FlightEntity() {}
 
-    public FlightEntity(long plane_id, String destination, long booked_ticket, long remain_ticket) {
+    public FlightEntity(long flight,long plane_id, String destination, long booked_ticket, long remain_ticket) {
         this.plane_id = plane_id;
         this.destination = destination;
         this.booked_ticket = booked_ticket;
         this.remain_ticket = remain_ticket;
+        this.flight = flight;
     }
 }

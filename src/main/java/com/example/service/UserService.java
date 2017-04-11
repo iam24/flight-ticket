@@ -3,10 +3,15 @@ package com.example.service;
 import com.example.Utils.MD5;
 import com.example.domain.UserEntity;
 import com.example.repository.UserRepository;
+import com.sun.tools.javac.code.Attribute;
+import com.sun.tools.javac.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
 
 /**
  * Created by iam24 on 17/4/1.
@@ -62,5 +67,13 @@ public class UserService {
         if (userRepository.findOne(id) == null) {return "用户不存在!";}
         userRepository.delete(id);
         return "删除成功!";
+    }
+
+//    public ArrayList<UserEntity> findall(){
+//        return userRepository.findAll();
+//    }
+
+    public ArrayList<UserEntity> findAllUser(){
+        return userRepository.findAllUser();
     }
 }

@@ -19,11 +19,22 @@ public class TicketController {
    @Autowired
    TicketService ticketService;
 
-   @RequestMapping(value = "/bookticket", method = RequestMethod.POST)
+   @RequestMapping(value = "/user/bookticket", method = RequestMethod.POST)
    @ResponseBody
     public String bookticket(@RequestParam("flight_number") long flight_number,
+                             @RequestParam("seat_number") long seat_number,
                              HttpSession session){
-       String result = ticketService.bookTicket(flight_number, session);
+       String result = ticketService.bookTicket(flight_number, seat_number, session);
+       return result;
+   }
 
+
+   @RequestMapping(value = "/user/returnticket", method = RequestMethod.POST)
+   @ResponseBody
+   public String returnticket(@RequestParam("flight_number") long flight_number,
+                              @RequestParam("name") String name){
+      String result = ticketService.returnTicket(flight_number, name);
+      return result;
    }
 }
+

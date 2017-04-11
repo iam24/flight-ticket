@@ -13,7 +13,15 @@ public class TicketEntity {
     private long id;
     private long seat_number;
     private String name;
-    private long flight_number;
+    private long flight;
+
+    public long getFlight() {
+        return flight;
+    }
+
+    public void setFlight(long flight) {
+        this.flight = flight;
+    }
 
     public long  getId() {
         return id;
@@ -39,19 +47,11 @@ public class TicketEntity {
         this.name = name;
     }
 
-    public long getFlight_number() {
-        return flight_number;
-    }
-
-    public void setFlight_number(int flight_number) {
-        this.flight_number = flight_number;
-    }
-
     protected TicketEntity() {}
 
-    public TicketEntity(String name, int flight_number, int seat_number) {
+    public TicketEntity(String name, long flight, long seat_number) {
         this.seat_number = seat_number;
         this.name = name;
-        this.flight_number = flight_number;
+        this.flight= flight;
     }
 }
