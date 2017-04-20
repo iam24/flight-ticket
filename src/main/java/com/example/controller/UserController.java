@@ -1,19 +1,21 @@
 package com.example.controller;
 
 import com.example.Utils.MD5;
+import com.example.domain.FlightEntity;
 import com.example.domain.UserEntity;
 import com.example.repository.UserRepository;
+import com.example.service.FlightService;
+import com.example.service.TicketService;
 import com.example.service.UserService;
 import com.sun.tools.javac.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.AttributeOverride;
 import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 
 /**
  * Created by iam24 on 17/3/30.
@@ -24,41 +26,20 @@ public class UserController {
 
     @Autowired
     UserService userService;
-    @RequestMapping("/")
-    @ResponseBody
-    public String Index() {
-        return "hello world";
 
-    }
+    @Autowired
+    TicketService ticketService;
 
-    @RequestMapping(value = "/register", method = RequestMethod.GET)
-    public String registerGet(){
-        return "register";
-    }
+    @Autowired
+    FlightService flightService;
 
-    @RequestMapping(value = "/register", method = RequestMethod.POST)
-    @ResponseBody
-    public String register(@ModelAttribute(value = "user") UserEntity new_user){
-        //UserEntity new_user = new UserEntity(name, person_id, 3, password);
-        String result = userService.register(new_user);
-        return result;
-    }
-
-    @RequestMapping(value = "/login", method = RequestMethod.POST)
-    @ResponseBody
-    public String login(@RequestParam("name") String name,
-                        @RequestParam("password") String password,
-                        HttpSession session){
-        String result = userService.login(name, MD5.getMD5(password), session);
-        return result;
-    }
-
-    @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public String loginOut(HttpSession session) {
-        session.removeAttribute("user");
-        return "redirect:/";
-    }
-
+    /**
+     * 编辑个人信息
+     * @param old_password
+     * @param new_password
+     * @param session
+     * @return
+     */
     @RequestMapping(value = "/edit", method = RequestMethod.POST)
     @ResponseBody
     public String edit(@RequestParam("old_password") String old_password,
@@ -67,16 +48,58 @@ public class UserController {
         return result;
     }
 
-    @RequestMapping(value = "/delete", method = RequestMethod.POST)
-    @ResponseBody
-    public String delete(@RequestParam("ID") long id, HttpSession session){
-        String result = userService.delete(id, session);
-        return result;
+    /**
+     * 订票
+     * @param model
+     * @param flight_number
+     * @param session
+     * @return
+     */
+
+    @RequestMapping(value = "/bookticket/{flight_number}", method = RequestMethod.GET)
+    public String bookticket(Model model,@PathVariable("flight_number") long flight_number,
+                             HttpSession session){
+        String result = ticketService.bookTicket(flight_number, session);
+        model.addAttribute("result", result);
+        return "UserResult";
     }
 
-    @RequestMapping(value = "/alluser", method = RequestMethod.GET)
-    @ResponseBody
-    public ArrayList<UserEntity> alluser(){
-        return userService.findAllUser();
+    /**
+     * 查看航班信息
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/allflight",method = RequestMethod.GET)
+    public String allflight(Model model){
+        model.addAttribute("flights",flightService.findAllFlight());
+        return "UserBookTicket";
+    }
+
+    /**
+     * 退票
+     * @param model
+     * @param flight_number
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "/returnticket/{flight_number}", method = RequestMethod.GET)
+    public String returnticket(Model model,@PathVariable("flight_number")long flight_number, HttpSession session){
+        UserEntity user = (UserEntity)session.getAttribute("user");
+        String name = user.getName();
+        String result = ticketService.returnTicket(flight_number, name);
+        model.addAttribute("result",result);
+        return "UserResult";
+    }
+
+    /**
+     * 我的订单
+     * @param model
+     * @param session
+     * @return
+     */
+    @RequestMapping(value = "/myticket", method = RequestMethod.GET)
+    public String myticket(Model model, HttpSession session){
+        model.addAttribute("tickets", ticketService.myticket(session));
+        return "UserTickets";
     }
 }

@@ -59,7 +59,7 @@ public class UserEntity {
         this.person_id = person_id;
     }
 
-    protected UserEntity() {}
+    public UserEntity() {}
 
     public UserEntity(String name, String password, String person_id, int role_id){
         this.name = name;
@@ -68,10 +68,10 @@ public class UserEntity {
         this.password = MD5.getMD5(password);
     }
 
-    public UserEntity(String name, String person_id){
+    public UserEntity(long id,String name, String person_id){
+        this.id = id;
         this.name = name;
         this.person_id = person_id;
-        System.out.println(1);
     }
 
     public boolean CheckPersonID(){

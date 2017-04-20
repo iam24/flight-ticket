@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * Created by iam24 on 17/4/6.
@@ -25,7 +26,7 @@ public class TicketService {
     FlightRepository flightRepository;
 
     @Transactional
-    public String bookTicket(long flight_number, long seat_number, HttpSession session){
+    public String bookTicket(long flight_number, HttpSession session){
         UserEntity userEntity = (UserEntity)  session.getAttribute("user");
        // if (userEntity == null) {return "请先登录!";}
         FlightEntity flightEntity = flightRepository.findByFlight(flight_number);
@@ -33,14 +34,16 @@ public class TicketService {
         if (flightEntity.getRemain_ticket() < 1){
             return "余票不足!";
         }
-
+        if (ticketRepository.findByFlightAndName(flight_number,userEntity.getName()) != null){
+            return "不能重复订票!";
+        }
         flightRepository.updateBookTicket(flight_number);
 
 //        flightEntity.setBooked_ticket(flightEntity.getBooked_ticket() + 1);
 //        flightEntity.setRemain_ticket(flightEntity.getRemain_ticket() - 1);
 //        flightRepository.save(flightEntity);
 
-        TicketEntity ticketEntity = new TicketEntity(userEntity.getName(), flight_number, seat_number);
+        TicketEntity ticketEntity = new TicketEntity(userEntity.getName(), flight_number);
         ticketRepository.save(ticketEntity);
         return "订票成功!";
     }
@@ -59,5 +62,15 @@ public class TicketService {
 //        flightRepository.save(flightEntity);
 
         return "退票成功!";
+    }
+
+    public ArrayList<TicketEntity> alltickets(){
+        return ticketRepository.findAll();
+    }
+
+    public ArrayList<TicketEntity> myticket(HttpSession session){
+        UserEntity userEntity = (UserEntity) session.getAttribute("user");
+        String name = userEntity.getName();
+        return ticketRepository.findByName(name);
     }
 }

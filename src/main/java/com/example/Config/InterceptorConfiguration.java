@@ -13,11 +13,14 @@ public class InterceptorConfiguration extends WebMvcConfigurerAdapter {
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
         // 注册拦截器
-        InterceptorRegistration ir = registry.addInterceptor(new LoginInterceptor());
+        InterceptorRegistration login = registry.addInterceptor(new LoginInterceptor());
+        InterceptorRegistration admin = registry.addInterceptor(new AdminInterceptor());
         // 配置拦截的路径
-        ir.addPathPatterns("/user/**");
+        login.addPathPatterns("/user/**");
+        login.addPathPatterns("/admin/**");
+        admin.addPathPatterns("/admin/**");
         // 配置不拦截的路径
-        ir.excludePathPatterns("/**.html");
+        login.excludePathPatterns("/**.html");
 
         // 还可以在这里注册其它的拦截器
         //registry.addInterceptor(new OtherInterceptor()).addPathPatterns("/**");

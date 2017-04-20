@@ -26,5 +26,7 @@ public interface FlightRepository  extends CrudRepository<FlightEntity, Long> {
     @Transactional
     @Query("update com.example.domain.FlightEntity f SET f.remain_ticket = f.remain_ticket - 1, f.booked_ticket = f.booked_ticket + 1 where f.flight = ?1")
     void updateBookTicket(long flight);
+
     ArrayList<FlightEntity> findAll();
+
 }

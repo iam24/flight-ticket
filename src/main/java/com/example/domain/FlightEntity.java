@@ -7,6 +7,7 @@ import javax.persistence.*;
  */
 //航线信息表
 @Entity
+@Table(name = "flight_entity", uniqueConstraints = {@UniqueConstraint(columnNames = "flight")})
 public class FlightEntity {
     @Id
     @GeneratedValue
@@ -15,7 +16,7 @@ public class FlightEntity {
     private String destination;
     private long booked_ticket;
     private long remain_ticket;
-    private long flight;
+    private long flight ;
 
     public long getFlight() {
         return flight;
