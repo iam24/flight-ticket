@@ -86,7 +86,7 @@ public class UserService {
 //        return userRepository.findAll();
 //    }
 
-    public ArrayList<UserEntity> findAllUser(){
+    public ArrayList<UserEntity> FindAllUser(){
         return userRepository.findAllUser();
     }
 
@@ -96,7 +96,7 @@ public class UserService {
      * @return
      * @throws IOException
      */
-    public String importexcel(MultipartFile file) throws IOException {
+    public String Importexcel(MultipartFile file) throws IOException {
         XSSFWorkbook workbook = new XSSFWorkbook(file.getInputStream());
         XSSFSheet sheet = workbook.getSheetAt(0);
         int totrows = sheet.getPhysicalNumberOfRows();

@@ -35,10 +35,16 @@
                     <a  th:href="@{/admin/allflight}"><i class="fa fa-columns"></i> <span class="nav-label">航班信息</span></a>
                 </li>
                 <li>
+                    <a  th:href="@{/admin/addflight}"><i class="fa fa-columns"></i> <span class="nav-label">添加航班信息</span></a>
+                </li>
+                <li>
                     <a  th:href="@{/admin/alluser}"><i class="fa fa-columns"></i> <span class="nav-label">所有用户</span></a>
                 </li>
                 <li>
                     <a  th:href="@{/admin/alltickets}"><i class="fa fa-columns"></i> <span class="nav-label">所有订单</span></a>
+                </li>
+                <li>
+                    <a  th:href="@{/admin/bookticket}"><i class="fa fa-columns"></i> <span class="nav-label">管理员订票</span></a>
                 </li>
                 <li>
                     <a  th:href="@{/admin/downloadexcel}"><i class="fa fa-columns"></i> <span class="nav-label">导出航班信息</span></a>
@@ -117,9 +123,11 @@
             </tbody>
         </table>
 
-        <div class="row J_mainContent" id="content-main">
-            <!--<iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="index_v2.html" frameborder="0" data-id="index_v2.html" ></iframe>-->
+        <div class="footer navbar-fixed-bottom">
+            <div class="pull-right">&copy; 2015-2017 <a href=" " target="_blank">陈舜禹 iam24</a>
+            </div>
         </div>
+
     </div>
     <!--右侧部分结束-->
     <!--右侧边栏开始-->
@@ -135,6 +143,7 @@
 <script src="/js/hplus.min.js?v=4.0.0"></script>
 <script type="text/javascript" src="/js/contabs.min.js"></script>
 <script src="/js/plugins/pace/pace.min.js"></script>
+<script src="/js/public.js"></script>
 </body>
 
 </html>

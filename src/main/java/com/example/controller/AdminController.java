@@ -1,6 +1,7 @@
 package com.example.controller;
 
 import com.example.domain.FlightEntity;
+import com.example.domain.TicketEntity;
 import com.example.domain.UserEntity;
 import com.example.service.FlightService;
 import com.example.service.TicketService;
@@ -36,7 +37,7 @@ public class AdminController {
     FlightService flightService;
     @RequestMapping(value = "/alluser", method = RequestMethod.GET)
     public String alluser(Model model){
-        model.addAttribute("users", userService.findAllUser());
+        model.addAttribute("users", userService.FindAllUser());
         return "AllUser";
     }
 
@@ -51,7 +52,7 @@ public class AdminController {
 
     @RequestMapping(value = "/importexcel", method = RequestMethod.POST)
     public String importexcel(Model model,@RequestParam("file") MultipartFile file) throws IOException {
-        String result = userService.importexcel(file);
+        String result = userService.Importexcel(file);
         model.addAttribute("result",result);
         return "importexcel";
     }
@@ -66,7 +67,7 @@ public class AdminController {
      */
     @RequestMapping(value = "/returnticket/{name}/{flight_number}", method = RequestMethod.GET)
     public String returnticket(Model model,@PathVariable("name") String name, @PathVariable("flight_number") long flight_number, HttpSession session){
-        String result = ticketService.returnTicket(flight_number, name);
+        String result = ticketService.ReturnTicket(flight_number, name);
         model.addAttribute("result", result);
         return "AdminResult";
     }
@@ -78,7 +79,7 @@ public class AdminController {
      */
     @RequestMapping(value = "/allflight",method = RequestMethod.GET)
     public String allflight(Model model){
-        model.addAttribute("flights",flightService.findAllFlight());
+        model.addAttribute("flights",flightService.FindAllFlight());
         return "AdminIndex";
 
     }
@@ -90,7 +91,7 @@ public class AdminController {
      */
     @RequestMapping(value = "alltickets", method = RequestMethod.GET)
     public String alltickets(Model model){
-        model.addAttribute("tickets", ticketService.alltickets());
+        model.addAttribute("tickets", ticketService.AllTickets());
         return "alltickets";
     }
 
@@ -121,14 +122,29 @@ public class AdminController {
         return "downloadexcel";
     }
 
-//    @RequestMapping(value = "addflight", method = RequestMethod.POST)
-//    public String addflight(Model model, @RequestParam("flight_number") long flight_number,
-//                            @RequestParam("destination") String destination,
-//                            @RequestParam("plane_id") long plane_id,
-//                            @RequestParam("remain_ticket") long remain_ticket,
-//                            @RequestParam("booked_ticket") long booked_ticket){
-//        String result = flightService.addflight(flight_number,destination,plane_id,remain_ticket,booked_ticket);
-//        model.addAttribute("result",result);
-//        return "AdminResult";
-//    }
+    @RequestMapping(value = "addflight", method = RequestMethod.GET)
+    public String addflightGet(){
+        return "AdminAddFlight";
+    }
+
+
+    @RequestMapping(value = "addflight", method = RequestMethod.POST)
+    public String addflight(Model model, @ModelAttribute("flight") FlightEntity flightEntity){
+        String result = flightService.AddFlight(flightEntity);
+        model.addAttribute("result",result);
+        return "AdminResult";
+    }
+
+    @RequestMapping(value = "bookticket",method = RequestMethod.GET)
+    public String bookticket(){
+        return "AdminBookTicket";
+    }
+
+    @RequestMapping(value = "bookticket", method = RequestMethod.POST)
+    public String bookticket(@ModelAttribute("ticket")TicketEntity ticketEntity,
+                             Model model){
+        String result = ticketService.AdminBookTicket(ticketEntity);
+        model.addAttribute("result", result);
+        return "AdminResult";
+    }
 }

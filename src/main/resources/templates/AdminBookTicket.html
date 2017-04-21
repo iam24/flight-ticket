@@ -89,43 +89,19 @@
             </div>
             <a th:href="@{/logout}" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
         </div>
-        <table class="table table-hover table-striped">
-            <thead>
-            <tr>
-                <th>
-                    航班编号
-                </th>
-                <th>
-                    目的地
-                </th>
-                <th>
-                    飞机编号
-                </th>
-                <th>
-                    订票数
-                </th>
-                <th>
-                    余票数
-                </th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr  th:each="flight:${flights}">
-                <td th:text="${flight.flight}"> 123</td>
-                <td th:text="${flight.destination}">
-                    TB - Monthly
-                </td>
-                <td th:text="${flight.plane_id}">
-                    04/04/2012
-                </td>
-                <td th:text="${flight.booked_ticket}">
-                    Call in to confirm
-                </td>
-                <td th:text="${flight.remain_ticket}">
-                </td>
-            </tr>
-            </tbody>
-        </table>
+
+        <form role="form" class="form-inline" th:action="@{/admin/bookticket}"  th:object="${ticket}" method="post">
+            <div class="form-group" >
+                <label>姓名</label><input type="text" class="form-control"  name="name"/>
+            </div>
+            <div class="form-group" >
+                <label>航班号</label><input type="text" class="form-control" name="flight" />
+            </div>
+            <div class="form-group" >
+                <label>座位号</label><input type="text" class="form-control"  name="seat_number"/>
+            </div>
+            <button type="submit" class="btn btn-sm btn-primary">添加</button>
+        </form>
 
         <div class="row J_mainContent" id="content-main">
             <!--<iframe class="J_iframe" name="iframe0" width="100%" height="100%" src="index_v2.html" frameborder="0" data-id="index_v2.html" ></iframe>-->

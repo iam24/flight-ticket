@@ -12,8 +12,8 @@ import java.util.ArrayList;
 @Repository
 public interface TicketRepository extends CrudRepository<TicketEntity, Long> {
 //    TicketEntity findByName(String name);
-    TicketEntity findByFlight(long flight);
     TicketEntity findByFlightAndName(long flight, String name);
     ArrayList<TicketEntity> findAll();
     ArrayList<TicketEntity> findByName(String name);
+    ArrayList<TicketEntity> findByFlight(long flight);
 }

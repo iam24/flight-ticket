@@ -59,7 +59,7 @@ public class UserController {
     @RequestMapping(value = "/bookticket/{flight_number}", method = RequestMethod.GET)
     public String bookticket(Model model,@PathVariable("flight_number") long flight_number,
                              HttpSession session){
-        String result = ticketService.bookTicket(flight_number, session);
+        String result = ticketService.BookTicket(flight_number, session);
         model.addAttribute("result", result);
         return "UserResult";
     }
@@ -70,8 +70,8 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/allflight",method = RequestMethod.GET)
-    public String allflight(Model model){
-        model.addAttribute("flights",flightService.findAllFlight());
+    public String AllFlight(Model model){
+        model.addAttribute("flights",flightService.FindAllFlight());
         return "UserBookTicket";
     }
 
@@ -83,10 +83,10 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/returnticket/{flight_number}", method = RequestMethod.GET)
-    public String returnticket(Model model,@PathVariable("flight_number")long flight_number, HttpSession session){
+    public String ReturnTicket(Model model,@PathVariable("flight_number")long flight_number, HttpSession session){
         UserEntity user = (UserEntity)session.getAttribute("user");
         String name = user.getName();
-        String result = ticketService.returnTicket(flight_number, name);
+        String result = ticketService.ReturnTicket(flight_number, name);
         model.addAttribute("result",result);
         return "UserResult";
     }
@@ -98,8 +98,8 @@ public class UserController {
      * @return
      */
     @RequestMapping(value = "/myticket", method = RequestMethod.GET)
-    public String myticket(Model model, HttpSession session){
-        model.addAttribute("tickets", ticketService.myticket(session));
+    public String MyTicket(Model model, HttpSession session){
+        model.addAttribute("tickets", ticketService.MyTicket(session));
         return "UserTickets";
     }
 }

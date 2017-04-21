@@ -50,7 +50,8 @@ public class TicketEntity {
 
     protected TicketEntity() {}
 
-    public TicketEntity(String name, long flight) {
+    public TicketEntity(String name, long flight, long seat_number) {
+        this.seat_number = seat_number;
         this.name = name;
         this.flight= flight;
     }

@@ -15,15 +15,14 @@ public class FlightService {
     @Autowired
     FlightRepository flightRepository;
 
-    public ArrayList<FlightEntity> findAllFlight(){
+    public ArrayList<FlightEntity> FindAllFlight(){
         return flightRepository.findAll();
     }
 
-//    public String addflight(long flight_number,String destination, long plane_id,String remain_ticket,String booked_ticket){
-//        if (flightRepository.findByFlight(flight_number) != null)
-//            return "添加失败! 航班编号重复!";
-//        FlightEntity flightEntity = new (flight_number, plane_id, destination, booked_ticket, remain_ticket);
-//        flightRepository.save(flightEntity);
-//        return "添加成功!";
-//    }
+    public String AddFlight(FlightEntity flightEntity){
+        if (flightRepository.findByFlight(flightEntity.getFlight()) != null)
+            return "添加失败! 航班编号重复!";
+        flightRepository.save(flightEntity);
+        return "添加成功!";
+    }
 }
