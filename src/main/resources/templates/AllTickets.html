@@ -92,33 +92,20 @@
         <table class="table table-hover table-striped">
             <thead>
             <tr>
-                <th>
-                    编号
-                </th>
-                <th>
-                    姓名
-                </th>
-                <th>
-                    座位号
-                </th>
-                <th>
-                    航班号
-                </th>
+                <th>编号</th>
+                <th>姓名</th>
+                <th>座位号</th>
+                <th>航班号</th>
             </tr>
             </thead>
             <tbody>
             <tr  th:each="ticket:${tickets}">
-                <td th:text="${ticket.id}"> 123</td>
-                <td th:text="${ticket.name}">
-                    TB - Monthly
-                </td>
-                <td th:text="${ticket.seat_number}">
-                    04/04/2012
-                </td>
-                <td th:text="${ticket.flight}">
-                    Call in to confirm
-                </td>
-                <td ><a th:href="@{'/admin/returnticket/'+${ticket.name}+'/'+${ticket.flight}}"><button type="button" class="btn btn-sm btn-primary">删除</button></a></td>
+                <td th:text="${ticket.id}"></td>
+                <td th:text="${ticket.name}"></td>
+                <td th:text="${ticket.seat_number}"></td>
+                <td th:text="${ticket.flight}"></td>
+                <td ><a th:href="@{'/admin/returnticket/'+${ticket.name}+'/'+${ticket.flight}}">
+                    <button type="button" class="btn btn-sm btn-primary">删除</button></a></td>
             </tr>
             </tbody>
         </table>

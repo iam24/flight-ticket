@@ -112,17 +112,10 @@
             <tbody>
             <tr  th:each="flight:${flights}">
                 <td th:text="${flight.flight}"> 123</td>
-                <td th:text="${flight.destination}">
-                    TB - Monthly
-                </td>
-                <td th:text="${flight.plane_id}">
-                    04/04/2012
-                </td>
-                <td th:text="${flight.booked_ticket}">
-                    Call in to confirm
-                </td>
-                <td th:text="${flight.remain_ticket}">
-                </td>
+                <td th:text="${flight.destination}"></td>
+                <td th:text="${flight.plane_id}"></td>
+                <td th:text="${flight.booked_ticket}"></td>
+                <td th:text="${flight.remain_ticket}"></td>
             </tr>
             </tbody>
         </table>

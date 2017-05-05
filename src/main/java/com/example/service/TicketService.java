@@ -94,7 +94,7 @@ public class TicketService {
             return "订票失败!不能为乘客重复订票!";
         }
 
-        //分配座位  seat_number 若为0则随机分配, 若不为0贼检查座位是否已经被预订
+        //分配座位  seat_number 若为0则系统分配, 若不为0贼检查座位是否已经被预订
         ArrayList<TicketEntity> ticketEntityArrayList = ticketRepository.findByFlight(ticketEntity.getFlight());
         if (ticketEntity.getSeat_number() != 0) {
             for (TicketEntity ticket : ticketEntityArrayList) {
